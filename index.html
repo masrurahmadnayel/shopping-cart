@@ -29,7 +29,7 @@
                            <input id="mobile-current-amount" type="text" class="form-control text-center" value="1">
                            <button id="plus-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="mobile-price-one">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="sub-total">1,278</span></h5>
+                        <h5>$ <span id="tax">0</span></h5>
+                        <h5>$ <span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -78,21 +78,56 @@
       </div>
    </section>
 
-   
+
    <script>
 
       // icon button start
 
       var plusButton = document.getElementById('plus-button');
-      plusButton.addEventListener('click', function(){
-         clickingFunction('mobile-current-amount');
+      plusButton.addEventListener('click', function () {
+         addClickingFunction('mobile-current-amount', 'mobile-price-one',);
       })
 
-      function clickingFunction(id){
-         var currentAmount = document.getElementById(id).value;
+      var minusButton = document.getElementById('minus-button');
+      minusButton.addEventListener('click', function () {
+         minusClickingFunction('mobile-current-amount', 'mobile-price-one');
+      })
+
+
+
+      // plus minus function
+      function addClickingFunction(id_1, id_2) {
+         var currentAmount = document.getElementById(id_1).value;
          var currentAmountInDigit = parseFloat(currentAmount);
          currentAmountInDigit = currentAmountInDigit + 1;
-         document.getElementById(id).value = currentAmountInDigit;
+         document.getElementById(id_1).value = currentAmountInDigit;
+
+         // amount changing part
+         var mobilePriceOne = document.getElementById(id_2).innerText;
+         var mobilePriceOneInDigit = parseFloat(mobilePriceOne);
+         mobilePriceOneInDigit = mobilePriceOneInDigit + 1219;
+         document.getElementById(id_2).innerText = mobilePriceOneInDigit;
+      }
+
+      
+
+      function minusClickingFunction(id_1, id_2) {
+         var currentAmount = document.getElementById(id_1).value;
+         var currentAmountInDigit = parseFloat(currentAmount);
+
+         if (currentAmountInDigit <= 0) {
+            document.getElementById(id_1).value = 0;
+         }
+         else {
+            currentAmountInDigit = currentAmountInDigit - 1;
+            document.getElementById(id_1).value = currentAmountInDigit;
+
+            // amount changing part
+            var mobilePriceOne = document.getElementById(id_2).innerText;
+            var mobilePriceOneInDigit = parseFloat(mobilePriceOne);
+            mobilePriceOneInDigit = mobilePriceOneInDigit - 1219;
+            document.getElementById(id_2).innerText = mobilePriceOneInDigit;
+         }
       }
    </script>
 </body>
